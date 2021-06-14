@@ -25,7 +25,7 @@ const server = require("http").Server(app);
 server.listen(process.env.PORT || 8080, ()=>{
 
     if(process.env.PORT != null)
-        console.log(process.env.PORT);
+        console.log(`Running in ${process.env.PORT}`);
     else{
         console.log('8080');
     }
