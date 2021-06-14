@@ -22,7 +22,15 @@ function deleteDB(){
 
 app = express();
 const server = require("http").Server(app);
-server.listen(process.env.PORT || 8080);
+server.listen(process.env.PORT || 8080, ()=>{
+
+    if(process.env.PORT != null)
+        console.log(process.env.PORT);
+    else{
+        console.log('8080');
+    }
+
+});
 const io = require('socket.io') (server);
 io.on('connection',(socket)=>{
     console.log(`${socket.id} dang ket noi`);
