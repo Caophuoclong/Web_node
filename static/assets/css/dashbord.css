@@ -51,3 +51,42 @@ ul li{
 	border: 2px solid black;
 	height: 850px;
 }
+#weather{
+	display: grid;
+	justify-content: center;
+	grid-template-rows: 40px 100px 40px 70px 70px 70px;
+	padding: 5px;
+}
+.text-weather{
+	font-size: 35px;
+	font-family: sans-serif;
+
+}
+#city-name{
+	grid-row: 1/2;
+}
+#icon-weather{
+	grid-row: 2/3;
+
+}
+#temp{
+	grid-row: 3/4;
+}
+#windd{
+	display: flex;
+	align-items: center;
+	height: 70px;
+}
+.sun{
+	display: flex;
+	align-items: center;
+	height: 70px;
+}
+.icon_ww{
+	width: 40px;
+	height: 40px;
+}
+.text-ww{
+	font-size: 35px;
+	margin-left: 15px;
+}

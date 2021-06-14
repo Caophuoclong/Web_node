@@ -6,6 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Xin Chao <%= name %> </title>
     <link rel="stylesheet" href="../assets/css/dashbord.css">
+    <script src="/assets/js/jquery.min.js"></script>
+    <script type="text/javascript" src="assets/js/dashboard.js"></script>
+    <script src="socket.io/socket.io.js"></script>
+    <script>
+        let socket = io("http://tcplong.me");
+
+    </script>
 </head>
 
 <body>
@@ -24,9 +31,21 @@
     </header>
     <aside>
         <div id="weather">
-            <img src="" alt="">
-            <span>29&#8451;</span>
-
+            <span id="city-name" class="text-weather weather"></span>
+             <img class="text-weather weather" id="icon-weather" src="http://openweathermap.org/img/wn/04n@2x.png" alt="">
+            <span class="text-weather weather" id="temp"></span>
+            <div id="windd">
+                <img class="icon_ww" id="wind" src="assets/img/weather_icons/wind.svg" alt=""> <span  class="text-ww" id="wind-speed"></span>
+            </div>
+            <div class="sun" id="sun_rise">
+                <img class="icon_ww" src="assets/img/weather_icons/sunrise.svg" alt="">
+                <span class="text-ww" id="text-sr"></span>
+            </div>
+            <div class="sun" id="sun_set">
+                <img class="icon_ww" src="assets/img/weather_icons/sunset.svg" alt="">
+                <span class="text-ww" id="text-ss"></span>
+            </div>
+            
         </div>
         <div id="covid"></div>
     </aside>
