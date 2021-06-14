@@ -1,0 +1,51 @@
+html{
+	height:100%;
+}
+body{
+	width:  100%;
+	min-height:100%;
+	margin: 0px;
+	display: flex;
+	align-items:center;
+	justify-content:center;
+}
+
+.container{
+	padding: 20px 20px;
+	border: 1px solid green;
+	border-radius: 10%;
+	width:  50%;
+}
+.submit{
+
+	margin: 0px 35%;
+	font-size: 30px;
+
+
+}
+.box{
+	margin: 20px 0px;
+	height: 30px;
+}
+input:not(:last-child){
+	font-family: 'Josefin Slab', serif;
+	font-size: 30px;
+    width: 100%;
+    padding: 12px 20px;
+	border:  none;
+	border-bottom: 2px solid #50d8a4;
+}
+input:focus{
+	outline:  none;
+}
+.signup_form{
+	display:flex;
+	justify-content: center;
+}
+#canhbao{
+	font-family: 'Josefin Slab', serif;
+	font-size: 20px;
+	color: red;
+	margin: 0px 0px 0px 20px;
+	display: block;
+}

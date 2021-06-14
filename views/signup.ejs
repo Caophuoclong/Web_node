@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/assets/css/signup.css">
+    <title>Sign up</title>
+    <script src="/assets/js/jquery.min.js"></script>
+    <script src="socket.io/socket.io.js"></script>
+    <script>
+        let socket = io("http://localhost:8080");
+        $(document).ready(()=>{
+            $("#username").change((e)=>{
+                console.log($("#username").val());
+                socket.emit("signup",{'data': $("#username").val()});
+            });
+            socket.on("signup",(data)=>{
+                if(data.data == '1')
+                {
+                    $("#canhbao").html('<span style="color: red;">Tai khoan da ton tai</span>')
+                }
+            else{
+                    $("#canhbao").css('display','none');
+                }
+            });
+        });
+            
+        
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="signup_form">
+            <form action="signup" method="post" enctype="application/x-www-form-urlencoded">
+                <h1>Sign up form</h1>
+                <input type="text" placeholder="Name" class="box" id="name" name="name" required>
+                <br>
+                <input type="text" placeholder="User name" class="box" id="username" name="username" required>
+                <br>
+                <p id="canhbao"></p>
+                <br>
+                <input type="password" placeholder="Password" class="box" id="password" name="password" required>
+                <br>
+                <input type="text" placeholder="Phone number" class="box" id="phone" name="phone" required>
+                <br>
+                <input type="submit" id="btn" class="submit">
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>
