@@ -1,162 +1,268 @@
-body{
-	margin: 2px;
-	display: grid;
-	grid-template-rows: auto auto auto;
-	grid-template-columns: 0.15fr 1fr 0.15fr;
+body {
+    margin: 2px;
+    display: grid;
+    grid-template-rows: auto auto auto;
+    grid-template-columns: 0.15fr 1fr 0.15fr;
 }
-header{
-	display:grid;
-	grid-template-columns: 0.15fr 1fr 0.15fr;
-	align-items:  center;
-	justify-items: center;
-	grid-column: 1/4;
-	font-family:  sans-serif;
-	font-weight: bold;
-	font-size: 20px;
-	border-top: solid 2px grey;
-	border-bottom: solid 2px grey;
-	padding: 5px 0px;
-}
-aside{
-	display:grid;
-	grid-template-row: auto auto;
-}
-main{
-	grid-column: 2/4;
-}
-footer{
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	width: 100%;
-	height: 100px;
-	grid-column: 1/4;
-}
-#logo{
-	width: 70px;
-	height: ;
-	margin:  0px -10px;
-	border-radius: 10px;
-}
-ul li{
-	display: inline;
-	margin: 0px 30px;
-}
-#menu{
-	width: 100%;
-	display: flex;
-	justify-content: center;
-}
-#result{
-	border: 2px solid black;
-	height: 850px;
-}
-#weather{
-	display: grid;
-	justify-content: center;
-	grid-template-rows: 40px 100px 40px 70px 70px 70px;
-	padding: 5px;
-}
-.text-weather{
-	font-size: 35px;
-	font-family: sans-serif;
-
-}
-#city-name{
-	grid-row: 1/2;
-}
-#icon-weather{
-	grid-row: 2/3;
-
-}
-#temp{
-	grid-row: 3/4;
-}
-#windd{
-	display: flex;
-	align-items: center;
-	height: 70px;
-}
-.sun{
-	display: flex;
-	align-items: center;
-	height: 70px;
-}
-.icon_ww{
-	width: 40px;
-	height: 40px;
-}
-.text-ww{
-	font-size: 35px;
-	margin-left: 15px;
-}
-a {
-	text-decoration: none;
-}
-#name_user{
-	border: none;
-	font-family: sans-serif;
-	font-size: 20px;
-	color: pink;
-	cursor: pointer;
-	width: auto;
-}
-#name_user:focus{
+input{
 	outline: none;
 }
-#chat{
-	cursor: pointer;
-	color: red;
+header {
+    display: grid;
+    grid-template-columns: 0.15fr 1fr 0.15fr;
+    align-items: center;
+    justify-items: center;
+    grid-column: 1/4;
+    font-family: sans-serif;
+    font-weight: bold;
+    font-size: 20px;
+    border-top: solid 2px grey;
+    border-bottom: solid 2px grey;
+    padding: 5px 0px;
 }
 
-#chat-box{
-	display: grid;
-	grid-template-columns: 1fr 1fr 0.35fr 0.35fr;
-	grid-template-rows: auto auto;
+aside {
+    display: grid;
+    grid-template-rows: 450px auto;
 }
-#box-chat-show{
-	border: 1px solid black;
-	width: 97%;
-	margin: 10px;
-	height: 700px;
-	grid-column: 1/4;
-	padding: 15px;
-	overflow: auto;
+
+main {
+    grid-column: 2/4;
 }
-#inp-chat{
-	font-size: 25px;
-	padding: 15px;
-	margin: 10px;
-	height: 30px;
-	grid-row: 2/3;
-	grid-column: 1/3;
+
+footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100px;
+    grid-column: 1/4;
 }
-#send{
-	font-size: 25px;
-	padding: 15px;
-	margin: 10px;
-	width: 95%;
-	height: 65px;
-	grid-row: 2/3;
-	grid-column: 3/4;
+
+#logo {
+    width: 70px;
+    height: ;
+    margin: 0px -10px;
+    border-radius: 10px;
+}
+
+ul li {
+    display: inline;
+    margin: 0px 30px;
+}
+
+#menu {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+#result {
+    border: 2px solid black;
+    height: 950px;
+}
+
+#weather {
+    display: grid;
+    justify-content: center;
+    grid-template-rows: 40px 100px 40px 70px 70px 70px;
+    padding: 5px;
+    border-bottom: 1px solid black;
+}
+
+.text-weather {
+    font-size: 35px;
+    font-family: sans-serif;
 
 }
-#list{
-	border: 1px solid black;
-	margin: 10px;
-	width: 90%;
-	grid-column: 4/5;
-	grid-row: 1/4;
+
+#city-name {
+    grid-row: 1/2;
 }
-.text{
-	font-size: 30px;
+
+#icon-weather {
+    grid-row: 2/3;
+
 }
-.user{
-	font-family: serif;
+
+#temp {
+    grid-row: 3/4;
+}
+
+#windd {
+    display: flex;
+    align-items: center;
+    height: 70px;
+}
+
+.sun {
+    display: flex;
+    align-items: center;
+    height: 70px;
+}
+
+.icon_ww {
+    width: 40px;
+    height: 40px;
+}
+
+.text-ww {
+    font-size: 35px;
+    margin-left: 15px;
+}
+
+a {
+    text-decoration: none;
+}
+#covid{
+	border-bottom: 1px solid black;
+}
+
+#name_user {
+    border: none;
+    font-family: sans-serif;
+    font-size: 20px;
+    color: pink;
+    cursor: pointer;
+    width: auto;
+}
+
+#name_user:focus {
+    outline: none;
+}
+
+#chat {
+    cursor: pointer;
+    color: red;
+}
+
+#chat-box {
+    display: grid;
+    grid-template-columns: 1fr 1fr 0.35fr 0.35fr;
+    grid-template-rows: 50px auto auto;
+    height: 900px;
+}
+
+#box-chat-show {
+    border: 1px solid black;
+    width: 97%;
+    margin: 10px;
+    height: 700px;
+    grid-column: 1/4;
+    padding: 15px;
+    overflow: auto;
+    grid-row: 2/3;
+    border-radius: 10px;
+}
+
+#inp-chat {
+    font-size: 25px;
+    padding: 15px;
+    margin: 10px;
+    height: 30px;
+    grid-row: 3/4;
+    grid-column: 1/3;
+    border-radius: 10px;
+}
+
+#send {
+    font-size: 25px;
+    padding: 15px;
+    margin: 10px;
+    width: 95%;
+    height: 65px;
+    grid-row: 3/4;
+    grid-column: 3/4;
+    border-radius: 10px;
+
+}
+
+#list {
+    border: 1px solid black;
+    margin: 10px;
+    width: 90%;
+    grid-column: 4/5;
+    grid-row: 2/4;
+        border-radius: 10px;
+
+}
+
+.text {
+    font-size: 30px;
+}
+
+.user {
+    font-family: serif;
+    font-size: 20px;
+    margin: 10px;
+}
+
+#online {
+    font-family: sans-serif;
+    font-size: 30px;
+    border-radius: 10px;
+
+}
+
+#listroom {
+    margin: 30px;
+    height: 650px;
+    padding: 15px;
+    overflow: auto;
+}
+
+.rooms {
+    cursor: pointer;
+    font-size: 35px;
+    font-family: sans-serif;
+}
+
+.rooms:hover {
+    text-decoration: underline;
+}
+#roomNow{
+	font-size: 25px;
+}
+#box-room {
+    border: 2px solid black;
+    text-align: center;
+    width: 250px;
+    height: 25px;
+    margin: 10px;
+    padding: 5px;
+    font-weight: bolder;
+    border-radius: 10px;
+}
+.before{
+	margin: 30px;
+}
+#Room_name {
+	height: 42px;
+	width: 250px;
 	font-size: 20px;
-	margin: 10px;
+	border-radius: 10px;
 }
-#online{
+.btnRoom{
+	height: 46px;
+}
+#typing-img{
+	width: 20px;
+	height: 20px;
+}
+#typing{
+	width: 250px;
+}
+#bordd{
+	border: 1px solid black;
+	border-radius: 10px;
+}
+#danhsachroom{
+	padding: 20px;
+	text-align: center;
+	height: 50px;
 	font-family: sans-serif;
-	font-size: 30px;
+	font-size: 25px;
+}
+#createroom, #joinroom{
+	border-radius: 10px;
 }

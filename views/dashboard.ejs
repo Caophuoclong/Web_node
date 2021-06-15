@@ -4,7 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Xin Chao <%= name %> </title>
+    <title>Xin Chao
+        <%= name %>
+    </title>
     <link rel="stylesheet" href="../assets/css/dashbord.css">
     <script src="/assets/js/jquery.min.js"></script>
     <script type="text/javascript" src="assets/js/dashboard.js"></script>
@@ -15,6 +17,7 @@
 </head>
 
 <body>
+    <div style='display: none;' id='username'>caophuoclong1</div>
     <header id="header">
         <img src="assets/img/logo.png" alt="" id="logo">
         <ul id="menu">
@@ -24,18 +27,19 @@
             <li class="menu-item">Google</li>
         </ul>
         <div id="info">
-            <span>Xin chao,</span>
-            <a href="user" ><input type="text" value="<%= name%>" id="name_user" readonly></a>
-            <div id="log-out" ><a href="/logout">Log out</a></div>
+            
+            <span>Xin chào, 
+            <a href="user" id="name_user"><%= name%></a>
+            <div id="log-out"><a href="/logout">Log out</a></div>
         </div>
     </header>
     <aside>
         <div id="weather">
             <span id="city-name" class="text-weather weather"></span>
-             <img class="text-weather weather" id="icon-weather" src="http://openweathermap.org/img/wn/04n@2x.png" alt="">
+            <img class="text-weather weather" id="icon-weather" src="http://openweathermap.org/img/wn/04n@2x.png" alt="">
             <span class="text-weather weather" id="temp"></span>
             <div id="windd">
-                <img class="icon_ww" id="wind" src="assets/img/weather_icons/wind.svg" alt=""> <span  class="text-ww" id="wind-speed"></span>
+                <img class="icon_ww" id="wind" src="assets/img/weather_icons/wind.svg" alt=""> <span class="text-ww" id="wind-speed"></span>
             </div>
             <div class="sun" id="sun_rise">
                 <img class="icon_ww" src="assets/img/weather_icons/sunrise.svg" alt="">
@@ -45,21 +49,38 @@
                 <img class="icon_ww" src="assets/img/weather_icons/sunset.svg" alt="">
                 <span class="text-ww" id="text-ss"></span>
             </div>
-            
         </div>
         <div id="covid"></div>
     </aside>
     <main id="main">
         <div id="result">
+            <div class="before">
+                <div style="margin:30px"><input type="text" id="Room_name">
+                    <button id="createroom" class="btnRoom">Tạo phòng</button>
+                    <button id="joinroom" class="btnRoom">Tham gia phòng</button>
+                </div>
+                <div id="bordd">
+                    <div id="danhsachroom">Danh sách phòng</div>
+                    <div id="listroom">
+
+                </div>
+                </div>
+                
+            </div>
             <div id="chat-box">
-                <div id="box-chat-show">
-                    <div id="asd"></div>
+                <div id="box-room">
+                    <div id="roomNow"></div>
+                </div>
+                <div style="position: relative;" id="box-chat-show">
+                    <div id=asd></div>
+                    <div id="type"></div>
                 </div>
                 <input type="text" id="inp-chat">
                 <input type="button" value="Send" id="send">
                 <div id="list">
-                    <div style="justify-content:center;display:flex;border-bottom:2px solid green"><div id="online">Online</div></div>
-                    
+                    <div style="justify-content:center;display:flex;border-bottom:2px solid green">
+                        <div id="online">Member</div>
+                    </div>
                     <div id="list_user"></div>
                 </div>
             </div>
@@ -67,11 +88,9 @@
     </main>
     <footer>
         <div id="logo_network">
-            
         </div>
         <p>© Copyright 2021-2021 by Phuoc Long</p>
     </footer>
-
 </body>
 
 </html>

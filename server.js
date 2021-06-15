@@ -10,8 +10,10 @@ const uri = "mongodb+srv://phuoclong:51648951354@cluster0.fyage.mongodb.net/User
 const db_name = "User";
 const collection_name = "Test";
 const algorithm = "sha512";
+const db_name_message = "message";
+const collections_name_message = "user";
 
-function deleteDB() {
+function deleteDB(db_name, collection_name) {
     mongo.connect(uri, (err, client) => {
         const db = client.db(db_name);
         db.collection(collection_name).deleteMany({}, (err, collection) => {
@@ -19,7 +21,7 @@ function deleteDB() {
         })
     })
 }
-
+// deleteDB('message','rooms');
 app = express();
 let port1 = '';
 const server = require("http").Server(app);
@@ -34,16 +36,17 @@ let arr123 = [];
 
 const io = require('socket.io')(server);
 io.on('connection', (socket) => {
-    socket.on("add_user",(data)=>{
-        if(arr123.includes(data) === false)
-            arr123.push(data);
+    socket.on("add_user", (data) => {
+        socket.Username = data.username;
+        if (arr123.includes(data.name) === false)
+            arr123.push(data.name);
         console.log(arr123);
-        io.sockets.emit("add_success",arr123);
+        //io.sockets.emit("add_success", arr123);
     })
-    socket.on("logout",()=>{
-        arr123.splice(arr123.indexOf(socket.UserName),1);
+    socket.on("logout", () => {
+        arr123.splice(arr123.indexOf(socket.UserName), 1);
         console.log(arr123);
-        io.emit("add_success",arr123);
+        io.emit("add_success", arr123);
     })
     socket.on('signup', (data) => {
         console.log(data);
@@ -64,6 +67,7 @@ io.on('connection', (socket) => {
 
 
         })
+
     });
     socket.on("check_tai_khoan", (data) => {
         if (data != null) {
@@ -104,7 +108,7 @@ io.on('connection', (socket) => {
             const x = {
                 name: name,
                 speed: (speed * 3.6).toFixed(2),
-                temp: temp - 273.15,
+                temp: (temp - 273.15).toFixed(2),
                 sunrise: time_rise,
                 sunset: time_set,
                 icon: l,
@@ -114,15 +118,116 @@ io.on('connection', (socket) => {
 
         })
     })
-    socket.on("send-chat",(data)=>{
-        socket.userName = data.name;
-            data = {
-            data : data.data,
-            name: data.name,
+    socket.on("send-chat", (data1) => {
+        socket.userName = data1.name;
+        data = {
+            data: data1.data,
+            name: data1.name,
+            roomname: data1.roomname
         }
-        io.emit("rep-chat",data);
+        console.log(data.roomname);
+        io.to(data.roomname).emit("rep-chat", data);
     })
-   
+
+    socket.on("updateroom", () => {
+        mongo.connect(uri, (err, client) => {
+            let db = client.db(db_name_message);
+            const collect = 'rooms';
+            db.collection(collect).find({}).toArray((err, arr) => {
+                io.sockets.emit("roomlist", arr);
+            })
+        })
+    })
+    socket.on("createroom", (data) => {
+        socket.join(data.roomname);
+        mongo.connect(uri, (err, client) => {
+            let db = client.db(db_name_message);
+            const collect = 'rooms';
+            db.collection(collect).insertOne(data);
+            db.collection(collect).find({}).toArray((err, arr) => {
+                io.sockets.emit("roomlist", arr);
+            })
+        })
+
+    })
+    socket.on("joinroom", (data) => {
+        socket.join(data.roomname);
+        console.log(data);
+        mongo.connect(uri, (err, client) => {
+            let db = client.db(db_name_message);
+            const collect = 'rooms';
+            db.collection(collect).updateOne({roomname: data.roomname},
+            {
+                $addToSet:{
+                    member: data.username.trim()},
+                
+            })
+            db.collection(collect).find({}).toArray((err, arr) => {
+                console.log(arr);
+                io.sockets.emit("roomlist", arr);
+            })
+        })
+    })
+    socket.on("save_data", (data) => {
+        mongo.connect(uri, (err, client) => {
+            const db1 = client.db(db_name_message);
+            const room = data.roomname;
+            const username = data.username;
+            const name = data.name;
+            console.log(room);
+            const message = data.data;
+            const x = new Date().getTime();
+            const query = {
+                username: username,
+                time: x,
+                name: name,
+                data: message,
+            }
+            db1.collection(room).insertOne(query);
+        })
+
+
+    })
+    socket.on("updateMessage",(data)=>{
+        mongo.connect(uri, (err,client)=>{
+            const db = client.db(db_name_message);
+            db.collection(data).find({ }).toArray((err,r)=>{
+                
+                if(r != null){
+                    socket.emit('clear');
+                    r.forEach(x =>{
+                        socket.emit('updateMessage',x);
+                    })
+                }
+                    
+                    
+            })
+            db.collection('rooms').find({roomname: data}).toArray((err,r)=>{
+                r.forEach(x=>{
+                    io.to(x.roomname).emit('add_success',x.member);
+                })
+            })
+        })
+    })
+    socket.on("typing",(data)=>{
+        socket.broadcast.to(data.roomname).emit("typing",data.name);
+    socket.on("nonetyping",(data)=>{
+        console.log('xinasdhklj');
+        socket.broadcast.to(data.roomname).emit("nonetyping",data.name);
+    })
+})
+
+
+
+
+
+
+
+
+
+
+
+
 })
 
 
@@ -163,12 +268,12 @@ app.get('/login', (req, res) => {
 })
 app.get('/dashboard', (req, res) => {
     if (req.session.isAuthenticated)
-        res.render('dashboard', { 'name': req.session.authUser.name });
+        res.render('dashboard', { 'name': req.session.authUser.name, username: req.session.authUser.username });
     else
         res.redirect('/login');
 })
 app.get('/logout', (req, res) => {
-    req.session.destroy(()=>{
+    req.session.destroy(() => {
         res.redirect('/');
     })
 })
