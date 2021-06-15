@@ -114,7 +114,6 @@ io.on('connection', (socket) => {
     })
     socket.on("send-chat",(data)=>{
         socket.userName = data.name;
-        console.log(arr123);
             data = {
             data : data.data,
             name: data.name,
