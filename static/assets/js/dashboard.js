@@ -59,6 +59,6 @@ $(document).ready(()=>{
 		
 	})
 	 $("#log-out").click(()=>{
-        socket.emit('disconnect');
+        socket.emit('logout');
     })
 })

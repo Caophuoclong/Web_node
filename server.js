@@ -39,7 +39,7 @@ io.on('connection', (socket) => {
         console.log(arr123);
         io.sockets.emit("add_success",arr123);
     })
-    socket.on("disconnect",()=>{
+    socket.on("logout",()=>{
         arr123.splice(arr123.indexOf(socket.UserName),1);
         io.emit("add_success",arr123);
     })
