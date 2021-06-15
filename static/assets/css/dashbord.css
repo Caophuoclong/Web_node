@@ -90,3 +90,73 @@ ul li{
 	font-size: 35px;
 	margin-left: 15px;
 }
+a {
+	text-decoration: none;
+}
+#name_user{
+	border: none;
+	font-family: sans-serif;
+	font-size: 20px;
+	color: pink;
+	cursor: pointer;
+	width: auto;
+}
+#name_user:focus{
+	outline: none;
+}
+#chat{
+	cursor: pointer;
+	color: red;
+}
+
+#chat-box{
+	display: grid;
+	grid-template-columns: 1fr 1fr 0.35fr 0.35fr;
+	grid-template-rows: auto auto;
+}
+#box-chat-show{
+	border: 1px solid black;
+	width: 97%;
+	margin: 10px;
+	height: 700px;
+	grid-column: 1/4;
+	padding: 15px;
+	overflow: auto;
+}
+#inp-chat{
+	font-size: 25px;
+	padding: 15px;
+	margin: 10px;
+	height: 30px;
+	grid-row: 2/3;
+	grid-column: 1/3;
+}
+#send{
+	font-size: 25px;
+	padding: 15px;
+	margin: 10px;
+	width: 95%;
+	height: 65px;
+	grid-row: 2/3;
+	grid-column: 3/4;
+
+}
+#list{
+	border: 1px solid black;
+	margin: 10px;
+	width: 90%;
+	grid-column: 4/5;
+	grid-row: 1/4;
+}
+.text{
+	font-size: 30px;
+}
+.user{
+	font-family: serif;
+	font-size: 20px;
+	margin: 10px;
+}
+#online{
+	font-family: sans-serif;
+	font-size: 30px;
+}

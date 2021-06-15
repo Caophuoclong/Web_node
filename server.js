@@ -31,9 +31,23 @@ server.listen(process.env.PORT || 8080, () => {
 const api_key = "ce86fa1d45f983171c0b9a235b6a4a22";
 global.l = ''
 
-
+let list_user = [];
 const io = require('socket.io')(server);
 io.on('connection', (socket) => {
+    socket.on("add_user",(data)=>{
+        socket.UserName = data;
+        if(list_user.indexOf(data) < 0)
+            list_user.push(data);
+        io.emit("add_success",list_user);
+    })
+    socket.on("disconnect",()=>{
+        list_user.splice(list_user.indexOf(socket.UserName),1);
+        console.log(list_user);
+        console.log(socket.UserName);
+        io.emit("add_success",list_user);
+
+
+    })
     socket.on('signup', (data) => {
         console.log(data);
         mongo.connect(uri, (err, client) => {
@@ -53,7 +67,6 @@ io.on('connection', (socket) => {
 
 
         })
-
     });
     socket.on("check_tai_khoan", (data) => {
         if (data != null) {
@@ -104,7 +117,18 @@ io.on('connection', (socket) => {
 
         })
     })
-
+    socket.on("send-chat",(data)=>{
+        socket.userName = data.name;
+        list_user.push(socket.userName);
+        data = {
+            data : data.data,
+            name: data.name,
+        }
+        io.emit("rep-chat",data);
+    })
+    $("#log-out").click(()=>{
+        socket.emit('disconnect');
+    })
 })
 
 
@@ -148,6 +172,11 @@ app.get('/dashboard', (req, res) => {
         res.render('dashboard', { 'name': req.session.authUser.name });
     else
         res.redirect('/login');
+})
+app.get('/logout', (req, res) => {
+    req.session.destroy(()=>{
+        res.redirect('/');
+    })
 })
 
 app.post('/signup', (req, res) => {
@@ -198,7 +227,7 @@ app.post('/login', (req, res) => {
 
                 }
             } else
-                res.send("Sai ten tai khoan hoac mat khau");
+                res.render("login_error");
         })
     })
 })

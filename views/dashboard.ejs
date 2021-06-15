@@ -10,8 +10,7 @@
     <script type="text/javascript" src="assets/js/dashboard.js"></script>
     <script src="socket.io/socket.io.js"></script>
     <script>
-        let socket = io("http://tcplong.me");
-
+        let socket = io("http://tcplong.me/");
     </script>
 </head>
 
@@ -21,12 +20,13 @@
         <ul id="menu">
             <li class="menu-item"><a href="/">Home page</a></li>
             <li class="menu-item">Khoa hoc</li>
-            <li class="menu-item">Chat</li>
+            <li class="menu-item" id="chat">Chat</li>
             <li class="menu-item">Google</li>
         </ul>
         <div id="info">
             <span>Xin chao,</span>
-            <a href="user"><%= name%></a>
+            <a href="user" ><input type="text" value="<%= name%>" id="name_user" readonly></a>
+            <div id="log-out" ><a href="/logout">Log out</a></div>
         </div>
     </header>
     <aside>
@@ -50,7 +50,20 @@
         <div id="covid"></div>
     </aside>
     <main id="main">
-        <div id="result"></div>
+        <div id="result">
+            <div id="chat-box">
+                <div id="box-chat-show">
+                    <div id="asd"></div>
+                </div>
+                <input type="text" id="inp-chat">
+                <input type="button" value="Send" id="send">
+                <div id="list">
+                    <div style="justify-content:center;display:flex;border-bottom:2px solid green"><div id="online">Online</div></div>
+                    
+                    <div id="list_user"></div>
+                </div>
+            </div>
+        </div>
     </main>
     <footer>
         <div id="logo_network">
