@@ -37,7 +37,7 @@ io.on('connection', (socket) => {
     socket.on("add_user",(data)=>{
         arr123.push(data);
         console.log(arr123);
-        io.sockets.emit("success",arr123);
+        io.sockets.emit("add_success",arr123);
     })
     socket.on("disconnect",()=>{
         arr123.splice(arr123.indexOf(socket.UserName),1);
