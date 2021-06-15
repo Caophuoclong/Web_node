@@ -119,7 +119,6 @@ io.on('connection', (socket) => {
     })
     socket.on("send-chat",(data)=>{
         socket.userName = data.name;
-        list_user.push(socket.userName);
         data = {
             data : data.data,
             name: data.name,
