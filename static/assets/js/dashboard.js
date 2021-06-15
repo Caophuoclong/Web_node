@@ -34,16 +34,16 @@ function joinroom(id) {
     $("#chat-box").show(500);
     let id1 = $(`#${id}`).text();
     $("#roomNow").text(`Room: ${id1}`);
+    $("#roomNow").val(id1);
+
     const username = $("#username").text();
     let roomname = id1;
-    console.log('123'+roomname);
     // $("#listroom").text('');
     if (roomname != '') {
         let val = {
             username: username.trim(),
             roomname: roomname,
         }
-        console.log(username);
         socket.emit("joinroom", val);
         socket.emit("updateMessage", roomname);
 
@@ -75,10 +75,8 @@ $(document).ready(() => {
         const data = $("#inp-chat").val();
         const name = $("#name_user").text();
         const username = $("#username").text();
-        console.log(username);
         const roomname = $("#roomNow").val();
         $("#inp-chat").val('');
-        console.log(roomname);
         socket.emit("send-chat", { data: data, name: name, roomname: roomname });
         socket.emit("save_data", { data: data, username: username, roomname: roomname, name: name });
     })
@@ -90,7 +88,6 @@ $(document).ready(() => {
         $("#box-chat-show").scrollTop($("#box-chat-show")[0].scrollHeight);
     })
     socket.on("rep-chat", (data) => {
-        console.log(data);
         $("#asd").append('<div class="text">' + data.name + ': ' + data.data + '</div>');
         $("#box-chat-show").scrollTop($("#box-chat-show")[0].scrollHeight);
     })
@@ -157,7 +154,6 @@ $(document).ready(() => {
         let roomname = $("#Room_name").val();
         $("#type").show(1000);
         
-        console.log(name,roomname);
         socket.emit('typing', { roomname:roomname , name:name});
         socket.on("typing",(data)=>{
         	const html2 = `<div style="position: absolute; bottom:10px;font-size: 20px;" id="typing">\
@@ -169,10 +165,8 @@ $(document).ready(() => {
     $("#inp-chat").focusout(()=>{
     		const name = $("#name_user").text();
         let roomname = $("#Room_name").val();        
-        console.log(name,roomname);
         socket.emit('nonetyping', { roomname:roomname , name:name});
     		socket.on('nonetyping',()=>{
-    		console.log('xinchaooo');
     		$("#type").html('');
     	})
     })  
