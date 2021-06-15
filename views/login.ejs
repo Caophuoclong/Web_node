@@ -14,7 +14,13 @@
 				alert("Sai mat khau");
 			})
 			$("#username").focusout(()=>{
-				socket.emit("check_tai_khoan",$("#username").val());
+				let val = $("#username").val();
+				console.log(val);
+				if(val === ''){
+				console.log("xinchao");
+				}
+				if (val != '')
+					socket.emit("check_tai_khoan",val);
 			})
 			socket.on("check_tai_khoan",()=>{
 				alert("Tai khoan khong ton tai");
@@ -27,8 +33,8 @@
 	<div class="login_form">
 		<form action="/login" method="post" enctyp="application/x-www-form-urlencoded">
 			<h1>Login form</h1>
-			<input type="text" id="username" name="username" class="box" placeholder="User name" autofocus>
-			<input type="password" id="password" name="password" class="box" placeholder="Password" >
+			<input type="text" id="username" name="username" class="box" placeholder="User name" autofocus required>
+			<input type="password" id="password" name="password" class="box" placeholder="Password" required>
 			<input type="submit" class="box" id="btnSubmit">
 		</form>
 	</div>

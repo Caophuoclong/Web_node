@@ -35,12 +35,14 @@ let arr123 = [];
 const io = require('socket.io')(server);
 io.on('connection', (socket) => {
     socket.on("add_user",(data)=>{
-        arr123.push(data);
+        if(arr123.includes(data) === false)
+            arr123.push(data);
         console.log(arr123);
         io.sockets.emit("add_success",arr123);
     })
     socket.on("logout",()=>{
         arr123.splice(arr123.indexOf(socket.UserName),1);
+        console.log(arr123);
         io.emit("add_success",arr123);
     })
     socket.on('signup', (data) => {
