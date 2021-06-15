@@ -41,6 +41,7 @@ $(document).ready(()=>{
 	$("#send").click(()=>{
 		const data = $("#inp-chat").val();
 		const name = $("#name_user").val();
+		$("#inp-chat").val('');
 		console.log(name);
 		socket.emit("send-chat", {data: data,  name: name});
 	})
@@ -52,7 +53,7 @@ $(document).ready(()=>{
 	socket.emit("add_user",x);
 	socket.on("add_success",(data)=>{
 		$("#list_user").html('');
-		data.forEach((r)=>{
+			data.forEach((r)=>{
 			$("#list_user").append('<div class="user">'+r+'</div>')
 		})
 		

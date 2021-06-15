@@ -23,30 +23,25 @@ function deleteDB() {
 app = express();
 let port1 = '';
 const server = require("http").Server(app);
-server.listen(process.env.PORT || 8080, () => {
+server.listen(process.env.PORT || 3000, () => {
 
 
 });
 
 const api_key = "ce86fa1d45f983171c0b9a235b6a4a22";
 global.l = ''
+let arr123 = [];
 
-let list_user = [];
 const io = require('socket.io')(server);
 io.on('connection', (socket) => {
     socket.on("add_user",(data)=>{
-        socket.UserName = data;
-        if(list_user.indexOf(data) < 0)
-            list_user.push(data);
-        io.emit("add_success",list_user);
+        arr123.push(data);
+        console.log(arr123);
+        io.sockets.emit("success",arr123);
     })
     socket.on("disconnect",()=>{
-        list_user.splice(list_user.indexOf(socket.UserName),1);
-        console.log(list_user);
-        console.log(socket.UserName);
-        io.emit("add_success",list_user);
-
-
+        arr123.splice(arr123.indexOf(socket.UserName),1);
+        io.emit("add_success",arr123);
     })
     socket.on('signup', (data) => {
         console.log(data);
@@ -119,8 +114,8 @@ io.on('connection', (socket) => {
     })
     socket.on("send-chat",(data)=>{
         socket.userName = data.name;
-        list_user.push(socket.userName);
-        data = {
+        console.log(arr123);
+            data = {
             data : data.data,
             name: data.name,
         }

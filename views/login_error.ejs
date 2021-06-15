@@ -8,7 +8,7 @@
 	<script src="assets/js/jquery.min.js"></script>
 	<script src="socket.io/socket.io.js"></script>
 	<script>
-		let socket = io("https://firstwebwithnode.herokuapp.com/");
+		let socket = io("localhost:3000");
 		$(document).ready(()=>{
 			socket.on("sai_mat_khau",()=>{
 				alert("Sai mat khau");
