@@ -126,9 +126,7 @@ io.on('connection', (socket) => {
         }
         io.emit("rep-chat",data);
     })
-    $("#log-out").click(()=>{
-        socket.emit('disconnect');
-    })
+   
 })
 
 

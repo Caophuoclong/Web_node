@@ -57,4 +57,7 @@ $(document).ready(()=>{
 		})
 		
 	})
+	 $("#log-out").click(()=>{
+        socket.emit('disconnect');
+    })
 })
