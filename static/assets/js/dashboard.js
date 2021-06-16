@@ -54,7 +54,19 @@ function joinroom(id) {
 
 $(document).ready(() => {
     getLoca();
+    $("#inp-chat").keypress((e)=>{
+        if(e.which === 13){
+            const data = $("#inp-chat").val();
+        const name = $("#name_user").text();
+        const username = $("#username").text();
+        const roomname = $("#roomNow").val();
+        $("#inp-chat").val('');
+        socket.emit("send-chat", { data: data, name: name, roomname: roomname });
+        socket.emit("save_data", { data: data, username: username, roomname: roomname, name: name });
+        return false;
+        }
 
+    })
     $(".before").hide();
     socket.on("weather", (data) => {
         $("#city-name").html(data.name);

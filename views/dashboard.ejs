@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <meta http-equiv="Content-Security-Policy" content="script-src 'self' "> -->
     <title>Xin Chao
         <%= name %>
     </title>
@@ -12,12 +13,12 @@
     <script type="text/javascript" src="assets/js/dashboard.js"></script>
     <script src="socket.io/socket.io.js"></script>
     <script>
-        let socket = io("https://firstwebwithnode.herokuapp.com/");
+        let socket = io("localhost:3000/");
     </script>
 </head>
 
 <body>
-    <div style='display: none;' id='username'>caophuoclong1</div>
+    <div style='display: none;' id='username'><%= username%></div>
     <header id="header">
         <img src="assets/img/logo.png" alt="" id="logo">
         <ul id="menu">

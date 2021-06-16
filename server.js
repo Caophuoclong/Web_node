@@ -153,12 +153,16 @@ io.on('connection', (socket) => {
     socket.on("joinroom", (data) => {
         socket.join(data.roomname);
         mongo.connect(uri, (err, client) => {
+            console.log(data.roomname);
+            console.log(data.username);
             let db = client.db(db_name_message);
             const collect = 'rooms';
-            db.collection(collect).updateOne({roomname: data.roomname},
+            db.collection(collect).updateOne({roomname:  data.roomname},
             {
                 $addToSet:{
-                    member: data.username.trim()},
+                    member: data.username},
+                
+            },(err,x)=>{
                 
             })
             db.collection(collect).find({}).toArray((err, arr) => {
@@ -193,7 +197,6 @@ io.on('connection', (socket) => {
                 if(r != null){
                     socket.emit('clear');
                     r.forEach(x =>{
-                        console.log("123");
                         socket.emit('updateMessage',x);
                     })
                 }
