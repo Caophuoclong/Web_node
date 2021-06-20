@@ -16,7 +16,7 @@ const auth_router = require('./routes/auth');
 const connectDB = require('./db/database');
 const logout_router = require('./routes/logout');
 const Chat = require('./models/chat');
-server.listen(3000);
+server.listen(process.env.PORT || 3000);
 
 app.set(session('trust_prox', '1'))
 app.set("view engine", "ejs");
