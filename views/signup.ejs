@@ -4,9 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/assets/css/signup.css">
     <title>Sign up</title>
-    <script src="/assets/js/jquery.min.js"></script>
+    <link rel="stylesheet" href="css/signup.css">
+    <script src="js/jquery.min.js"></script>
     <script src="socket.io/socket.io.js"></script>
     <script>
         let socket = io("https://firstwebwithnode.herokuapp.com/");
@@ -33,7 +33,7 @@
 <body>
     <div class="container">
         <div class="signup_form">
-            <form action="signup" method="post" enctype="application/x-www-form-urlencoded">
+            <form action="api/auth/register" method="post" enctype="application/x-www-form-urlencoded">
                 <h1>Sign up form</h1>
                 <input type="text" placeholder="Name" class="box" id="name" name="name" required>
                 <br>

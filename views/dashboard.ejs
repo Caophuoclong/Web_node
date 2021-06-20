@@ -6,32 +6,48 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- <meta http-equiv="Content-Security-Policy" content="script-src 'self' "> -->
     <title>Xin Chao
-        <%= name %>
+        <%= data.name%>
     </title>
-    <link rel="stylesheet" href="../assets/css/dashbord.css">
-    <script src="/assets/js/jquery.min.js"></script>
-    <script type="text/javascript" src="assets/js/dashboard.js"></script>
-    <script src="socket.io/socket.io.js"></script>
-    <script>
-        let socket = io("localhost:3000/");
-    </script>
+    <link rel="stylesheet" href="css/dashbord.css">
+    <script src="js/jquery.min.js"></script>
+    <!--     <script src="socket.io/socket.io.js"></script>
+ -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </head>
 
 <body>
-    <div style='display: none;' id='username'><%= username%></div>
+    <div style='display: none;' id='username'>
+        <%= data.username%>
+    </div>
     <header id="header">
-        <img src="assets/img/logo.png" alt="" id="logo">
+        <img src="img/logo.png" alt="" id="logo">
         <ul id="menu">
-            <li class="menu-item"><a href="/">Home page</a></li>
-            <li class="menu-item">Khoa hoc</li>
-            <li class="menu-item" id="chat">Chat</li>
-            <li class="menu-item">Google</li>
+            <li class="menu-item dropdown"><a href="/"><img src="img/header_icons/home.ico" alt=""></a>
+                <div class="dropdown-chat">Home</div></li>
+            <li class="menu-item dropdown" >
+                <img src="/img/header_icons/school.ico" alt="">
+                <div class="dropdown-chat">School</div>
+            </li>
+            <li class="menu-item dropdown" id="chat">
+                <img src="/img/header_icons/chat.ico" alt="">
+                <div class="dropdown-chat">Chat</div>
+            </li>
+            <li class="menu-item" id="dropdown-search">
+                <img src="/img/header_icons/search.ico" alt="">
+                <div class="search-box">
+                    <input type="text" id="input-search">
+                    
+                </div>
+            </li>
         </ul>
-        <div id="info">
-            
-            <span>Xin chào, 
-            <a href="user" id="name_user"><%= name%></a>
-            <div id="log-out"><a href="/logout">Log out</a></div>
+        <div class="dropdown">
+            <img src="img/header_icons/menu.ico" alt="">
+            <div class="dropdown-content">
+                <span>Xin chào,
+                    <a href="user" id="name_user">
+                        <%= data.name%></a>
+                    <div id="log-out"><a href="/logout">Log out</a></div>
+            </div>
         </div>
     </header>
     <aside>
@@ -40,14 +56,14 @@
             <img class="text-weather weather" id="icon-weather" src="http://openweathermap.org/img/wn/04n@2x.png" alt="">
             <span class="text-weather weather" id="temp"></span>
             <div id="windd">
-                <img class="icon_ww" id="wind" src="assets/img/weather_icons/wind.svg" alt=""> <span class="text-ww" id="wind-speed"></span>
+                <img class="icon_ww" id="wind" src="img/weather_icons/wind.svg" alt=""> <span class="text-ww" id="wind-speed"></span>
             </div>
             <div class="sun" id="sun_rise">
-                <img class="icon_ww" src="assets/img/weather_icons/sunrise.svg" alt="">
+                <img class="icon_ww" src="img/weather_icons/sunrise.svg" alt="">
                 <span class="text-ww" id="text-sr"></span>
             </div>
             <div class="sun" id="sun_set">
-                <img class="icon_ww" src="assets/img/weather_icons/sunset.svg" alt="">
+                <img class="icon_ww" src="img/weather_icons/sunset.svg" alt="">
                 <span class="text-ww" id="text-ss"></span>
             </div>
         </div>
@@ -56,33 +72,20 @@
     <main id="main">
         <div id="result">
             <div class="before">
-                <div style="margin:30px"><input type="text" id="Room_name">
+                <div style="margin:30px" id='aboutRoom'>
+                    <input type="text" id="Room_name">
                     <button id="createroom" class="btnRoom">Tạo phòng</button>
                     <button id="joinroom" class="btnRoom">Tham gia phòng</button>
                 </div>
                 <div id="bordd">
                     <div id="danhsachroom">Danh sách phòng</div>
                     <div id="listroom">
-
-                </div>
-                </div>
-                
-            </div>
-            <div id="chat-box">
-                <div id="box-room">
-                    <div id="roomNow"></div>
-                </div>
-                <div style="position: relative;" id="box-chat-show">
-                    <div id=asd></div>
-                    <div id="type"></div>
-                </div>
-                <input type="text" id="inp-chat">
-                <input type="button" value="Send" id="send">
-                <div id="list">
-                    <div style="justify-content:center;display:flex;border-bottom:2px solid green">
-                        <div id="online">Member</div>
+                        <%for(let i in room){%>
+                        <div class="rooms" id='<%= room[i].roomname.trim().replace(/ /g,"")%>' onclick="joinroom(this.id)">
+                            <%= room[i].roomname%>
+                        </div>
+                        <%}%>
                     </div>
-                    <div id="list_user"></div>
                 </div>
             </div>
         </div>
@@ -92,6 +95,9 @@
         </div>
         <p>© Copyright 2021-2021 by Phuoc Long</p>
     </footer>
+    <script type="text/javascript" src="js/dashboard.js"></script>
+    <script type="text/javascript" src="js/weather.js"></script>
+    
 </body>
 
 </html>
